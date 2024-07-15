@@ -27,6 +27,7 @@ int main()
     int nPlayer1_pos = nScreenWidth * nPlayer1Y + 3;
     int nPlayer2Y = nScreenHeight / 2;
     int nPlayer2_pos = nScreenWidth * nPlayer2Y + nScreenWidth - 4;
+    int nPlayer2_speed = 1;
     int nBallY = nScreenHeight/2;
     int nBallX = nScreenWidth;
     int nBallXCorrection = nBallX / 2;
@@ -66,9 +67,14 @@ int main()
             }
         }
       
+        
+        if ((nPlayer2_pos <= (nScreenWidth * 2) + nScreenWidth - 4) || (nPlayer2_pos >= (nScreenWidth * (nScreenHeight - 2)) + nScreenWidth - 4))
+        {
+            nPlayer2_speed *= -1;
+        }
         nBallY += nBallSpeedY;
         nBallXCorrection -= nBallSpeedX;
-        
+        nPlayer2_pos += nScreenWidth * nPlayer2_speed;
         if ((nBallY>=nScreenHeight-2) || (nBallY <=3))
         {
             nBallSpeedY *= -1;
@@ -84,6 +90,12 @@ int main()
         if (nBall_pos - 1 == nPlayer1_pos)
         {
             nBallSpeedX *= -1;
+            nBallSpeedY *= -1;
+        }
+        if (nBall_pos + 1 == nPlayer2_pos)
+        {
+            nBallSpeedX *= -1;
+            nBallSpeedY *= -1;
         }
         
             
